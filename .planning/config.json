@@ -6,8 +6,13 @@
   "model_profile": "balanced",
   "workflow": {
     "research": true,
-    "plan_check": true,
-    "verifier": false,
-    "nyquist_validation": true
+    "plan_check": false,
+    "verifier": true,
+    "nyquist_validation": true,
+    "auto_advance": false,
+    "_auto_chain_active": false
+  },
+  "git": {
+    "branching_strategy": "none"
   }
 }
