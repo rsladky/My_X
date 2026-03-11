@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: "Checkpoint reached after 01-01 Task 1 — awaiting human verify of cargo leptos watch at localhost:3000"
-last_updated: "2026-03-11T19:17:27.852Z"
+stopped_at: "Completed 01-01-PLAN.md — scaffold verified at localhost:3000"
+last_updated: "2026-03-11T19:47:32.083Z"
 last_activity: 2026-03-11 — Roadmap created, ready for Phase 1 planning
 progress:
   total_phases: 5
@@ -51,6 +51,7 @@ Progress: [███░░░░░░░] 33%
 
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 15 | 1 tasks | 16 files |
+| Phase 01-foundation P01 | 45 | 2 tasks | 16 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,8 @@ Recent decisions affecting current work:
 - Feed design: Pull-on-read JOIN query, cursor-based (created_at, id) pagination from day one
 - [Phase 01-foundation]: Scaffolded via cargo-generate (not cargo leptos new) due to interactive TTY requirement; template uses src/main.rs not src/bin/server/main.rs
 - [Phase 01-foundation]: Server-only crates (sqlx, jsonwebtoken, argon2) feature-gated under [ssr] to prevent WASM compilation failures
+- [Phase 01-foundation]: uuid moved to optional=true under ssr feature — uuid v4 requires OS RNG unavailable in WASM
+- [Phase 01-foundation]: Server-only crates (sqlx, jsonwebtoken, argon2, uuid) all feature-gated under [ssr] to prevent WASM compilation failures — pattern for all subsequent plans
 
 ### Pending Todos
 
@@ -76,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T19:17:27.850Z
-Stopped at: Checkpoint reached after 01-01 Task 1 — awaiting human verify of cargo leptos watch at localhost:3000
+Last session: 2026-03-11T19:47:32.081Z
+Stopped at: Completed 01-01-PLAN.md — scaffold verified at localhost:3000
 Resume file: None

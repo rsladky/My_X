@@ -35,8 +35,9 @@ tech-stack:
     - console_error_panic_hook 0.1 (WASM panic formatting)
   patterns:
     - Feature flags split: ssr (server) vs hydrate (WASM client)
-    - Server-only crates (sqlx, jsonwebtoken, argon2) feature-gated under [ssr]
+    - Server-only crates (sqlx, jsonwebtoken, argon2, uuid) feature-gated under [ssr]
     - cargo-generate used as scaffold mechanism (cargo leptos new is interactive-only)
+    - All crates using OS-level resources (RNG, file I/O) must be optional = true under ssr
 
 key-files:
   created:
@@ -55,12 +56,14 @@ key-decisions:
   - "Scaffolded via cargo-generate instead of cargo leptos new (interactive terminal required)"
   - "Template uses src/main.rs not src/bin/server/main.rs — kept template structure"
   - "Server-side crates feature-gated under [ssr] to avoid WASM compilation errors"
+  - "uuid moved from [dependencies] to optional=true under ssr — uuid v4 requires OS RNG unavailable in WASM"
   - "Cargo.lock committed (executable project, not library)"
   - ".env added to .gitignore for secret safety"
 
 patterns-established:
   - "Feature-gated dependencies: all server-only crates under [features.ssr] to compile correctly to WASM"
   - "SSR/hydrate split: lib compiles twice (server + WASM); main.rs is server entry point"
+  - "Any crate using OS-level resources (getrandom/RNG, sockets) must be optional=true and ssr-gated"
 
 requirements-completed: []
 
@@ -78,14 +81,15 @@ completed: 2026-03-11
 - **Duration:** 15 min
 - **Started:** 2026-03-11T19:00:20Z
 - **Completed:** 2026-03-11T19:15:33Z
-- **Tasks:** 1 of 1 auto tasks complete (checkpoint pending human verify)
+- **Tasks:** 2 of 2 complete (1 auto + 1 checkpoint — approved)
 - **Files modified:** 16
 
 ## Accomplishments
 - Scaffolded start-axum template via cargo-generate (Leptos 0.8.0 + Axum 0.8.0)
 - Renamed package from `my_x_scaffold` to `my_x`
 - Added all Phase 1-5 dependencies to Cargo.toml with correct feature gating
-- `cargo build` exits 0 with no errors
+- Fixed uuid WASM compilation failure by moving it to ssr-only optional dependency
+- `cargo build` exits 0 with no errors; `cargo leptos watch` serves HTML at localhost:3000
 - .gitignore updated: Cargo.lock tracked (executable), .env excluded (security)
 
 ## Task Commits
@@ -93,8 +97,9 @@ completed: 2026-03-11
 Each task was committed atomically:
 
 1. **Task 1: Scaffold project with cargo leptos new and add all dependencies** - `c05ca5e` (feat)
+2. **Fix: Move uuid to SSR-only optional dependency** - `a0aa62f` (fix)
 
-**Plan metadata:** TBD (created after checkpoint approval)
+**Plan metadata:** TBD (docs: complete plan — created after checkpoint approval)
 
 ## Files Created/Modified
 - `Cargo.toml` - Package renamed to my_x; all Phase 1-5 deps declared with ssr/hydrate feature gating
@@ -108,7 +113,7 @@ Each task was committed atomically:
 ## Decisions Made
 - **cargo-generate instead of cargo leptos new**: `cargo leptos new` requires an interactive terminal (TTY). Used `cargo generate` directly with the same template URL. Same result.
 - **src/main.rs, not src/bin/server/main.rs**: The actual start-axum template uses `src/main.rs` as the binary entry point, not `src/bin/server/main.rs` as referenced in the plan. Kept the actual template structure.
-- **Server-only crates feature-gated under [ssr]**: sqlx, jsonwebtoken, argon2, rand, tracing, tracing-subscriber, dotenvy all gated under `[features.ssr]` to prevent WASM compilation errors. serde, serde_json, chrono, uuid, thiserror remain ungated (used on both sides).
+- **Server-only crates feature-gated under [ssr]**: sqlx, jsonwebtoken, argon2, rand, tracing, tracing-subscriber, dotenvy, uuid all gated under `[features.ssr]` to prevent WASM compilation errors. serde, serde_json, chrono, thiserror remain ungated (used on both sides).
 
 ## Deviations from Plan
 
@@ -130,22 +135,31 @@ Each task was committed atomically:
 - **Verification:** cargo build exits 0; server entry point compiles correctly
 - **Committed in:** c05ca5e
 
+**3. [Rule 1 - Bug] Fixed uuid WASM compilation failure**
+- **Found during:** Post-checkpoint (outside agent — fix applied by user after WASM build failure on `cargo leptos watch`)
+- **Issue:** uuid was declared in `[dependencies]` (non-optional), causing WASM build failure — uuid v4 feature requires OS-level RNG (getrandom) which is not available in WASM without a JS shim
+- **Fix:** Moved uuid from `[dependencies]` to `optional = true` under server-side deps section; added `"dep:uuid"` to ssr feature list
+- **Files modified:** `Cargo.toml`
+- **Verification:** `cargo leptos watch` completes WASM build and serves HTML at localhost:3000
+- **Committed in:** `a0aa62f` (fix commit)
+
 ---
 
-**Total deviations:** 2 auto-fixed (both Rule 1 - template/tooling bugs)
-**Impact on plan:** Both fixes address tooling constraints. Functional outcome is identical to the plan's intent. No scope creep.
+**Total deviations:** 3 auto-fixed (2 Rule 1 - template/tooling bugs; 1 Rule 1 - WASM compilation bug)
+**Impact on plan:** All fixes address tooling and compilation constraints. Functional outcome is identical to the plan's intent. Established the critical SSR feature gate pattern for OS-level crates. No scope creep.
 
 ## Issues Encountered
 - Leptos.toml does not exist as a separate file in the start-axum template — configuration lives in `[package.metadata.leptos]` section of Cargo.toml (consistent with cargo-leptos 0.3.x standards).
 
 ## User Setup Required
-None - no external service configuration required for Task 1. The human-verify checkpoint will confirm `cargo leptos watch` starts and serves HTML at localhost:3000.
+None - no external service configuration required. Database setup will be covered in Phase 1 Plan 02.
 
 ## Next Phase Readiness
 - `cargo build` passes — foundation compiles cleanly
+- `cargo leptos watch` verified: serves HTML at localhost:3000 without panics (checkpoint approved)
 - All Phase 1-5 dependency versions locked in Cargo.lock
-- Awaiting human verification that `cargo leptos watch` starts and localhost:3000 serves HTML (checkpoint pending)
-- After checkpoint approval: ready for Phase 1 Plan 02 (database migrations)
+- SSR feature gate pattern established — all subsequent plans adding server-only crates must follow this pattern
+- Ready for Phase 1 Plan 02 (database migrations): sqlx already declared and ssr-gated
 
 ---
 *Phase: 01-foundation*
