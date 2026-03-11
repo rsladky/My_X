@@ -1,5 +1,12 @@
 
 #[cfg(feature = "ssr")]
+async fn error_test_handler() -> Result<axum::Json<serde_json::Value>, my_x::server::error::AppError> {
+    Err(my_x::server::error::AppError::ValidationError(
+        "This is a test error".to_string(),
+    ))
+}
+
+#[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
     use axum::Router;
@@ -15,6 +22,7 @@ async fn main() {
     let routes = generate_route_list(App);
 
     let app = Router::new()
+        .route("/error-test", axum::routing::get(error_test_handler))
         .leptos_routes(&leptos_options, routes, {
             let leptos_options = leptos_options.clone();
             move || shell(leptos_options.clone())
