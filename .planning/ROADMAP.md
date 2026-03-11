@@ -29,7 +29,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. `cargo sqlx migrate run` applies all migrations (users, posts, follows tables with indexes) against a local PostgreSQL instance without errors
   3. `SQLX_OFFLINE=true cargo build` compiles successfully, confirming offline mode is configured and `.sqlx/` is committed
   4. A deliberate bad handler returns a structured `AppError` JSON response (not a panic or empty 500)
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 01-01-PLAN.md — Scaffold Cargo workspace with start-axum template and all dependencies
+- [ ] 01-02-PLAN.md — Database migrations (users, posts, follows) and SQLx offline mode
+- [ ] 01-03-PLAN.md — AppError enum with IntoResponse and test route
 
 ### Phase 2: Auth
 **Goal**: Users can securely create accounts, log in, stay logged in across sessions, and log out
@@ -82,7 +86,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/3 | Not started | - |
 | 2. Auth | 0/TBD | Not started | - |
 | 3. Posts + Profiles | 0/TBD | Not started | - |
 | 4. Social Graph + Feed | 0/TBD | Not started | - |
