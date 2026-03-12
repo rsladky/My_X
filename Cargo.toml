@@ -29,12 +29,14 @@ rand = { version = "0.8", optional = true }
 tracing = { version = "0.1", optional = true }
 tracing-subscriber = { version = "0.3", features = ["env-filter"], optional = true }
 dotenvy = { version = "0.15", optional = true }
+web-sys = { version = "0.3", features = ["Storage", "Window"], optional = true }
 
 [features]
 hydrate = [
     "leptos/hydrate",
     "dep:console_error_panic_hook",
     "dep:wasm-bindgen",
+    "dep:web-sys",
 ]
 ssr = [
     "dep:axum",

@@ -10,10 +10,14 @@ async fn error_test_handler() -> Result<axum::Json<serde_json::Value>, my_x::ser
 #[tokio::main]
 async fn main() {
     use axum::Router;
+    use dotenvy::dotenv;
     use leptos::logging::log;
     use leptos::prelude::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use my_x::app::*;
+    use sqlx::PgPool;
+
+    dotenv().ok();
 
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
@@ -21,12 +25,24 @@ async fn main() {
     // Generate the list of routes in your Leptos App
     let routes = generate_route_list(App);
 
+    let pool = PgPool::connect(&std::env::var("DATABASE_URL").expect("DATABASE_URL"))
+        .await
+        .expect("db pool");
+
     let app = Router::new()
         .route("/error-test", axum::routing::get(error_test_handler))
-        .leptos_routes(&leptos_options, routes, {
-            let leptos_options = leptos_options.clone();
-            move || shell(leptos_options.clone())
-        })
+        .leptos_routes_with_context(
+            &leptos_options,
+            routes,
+            {
+                let pool = pool.clone();
+                move || leptos::prelude::provide_context(pool.clone())
+            },
+            {
+                let leptos_options = leptos_options.clone();
+                move || shell(leptos_options.clone())
+            },
+        )
         .fallback(leptos_axum::file_and_error_handler(shell))
         .with_state(leptos_options);
 
