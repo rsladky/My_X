@@ -150,3 +150,14 @@ None - no external service configuration required. JWT_SECRET is already in .env
 ---
 *Phase: 02-auth*
 *Completed: 2026-03-12*
+
+## Self-Check: PASSED
+
+- FOUND: src/server/auth/handlers.rs
+- FOUND: src/server/auth/mod.rs
+- FOUND: migrations/20240101000004_add_username_to_users.sql
+- FOUND: .planning/phases/02-auth/02-01-SUMMARY.md
+- FOUND: commit a3eda4f (Task 1)
+- FOUND: commit 2933641 (Task 2)
+- FOUND: commit c4488a4 (Task 3)
+- FOUND: commit fcf484a (metadata)

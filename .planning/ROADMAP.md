@@ -13,7 +13,7 @@ My_X is a full-stack Rust Twitter/X clone built for learning. The journey runs f
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Foundation** - Cargo workspace, Axum server, PostgreSQL schema, SQLx offline mode
-- [ ] **Phase 2: Auth** - Registration, login, JWT middleware, persistent session, logout
+- [x] **Phase 2: Auth** - Registration, login, JWT middleware, persistent session, logout (completed 2026-03-12)
 - [ ] **Phase 3: Posts + Profiles** - Create/delete posts, view own and other users' profiles with post history
 - [ ] **Phase 4: Social Graph + Feed** - Follow/unfollow, follow state on profiles, home feed with cursor pagination
 - [ ] **Phase 5: Polish** - Loading states, post-create redirect, UX completeness across all pages
@@ -90,7 +90,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 1/3 | In Progress|  |
-| 2. Auth | 1/2 | In Progress|  |
+| 2. Auth | 2/2 | Complete   | 2026-03-12 |
 | 3. Posts + Profiles | 0/TBD | Not started | - |
 | 4. Social Graph + Feed | 0/TBD | Not started | - |
 | 5. Polish | 0/TBD | Not started | - |

@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-auth-01-PLAN.md — auth server functions and username migration
-last_updated: "2026-03-12T09:43:11.960Z"
+stopped_at: Paused at Task 3 checkpoint (human-verify) in 02-auth-02-PLAN.md
+last_updated: "2026-03-12T12:11:15.375Z"
 last_activity: 2026-03-12 — Phase 2 context captured, ready to plan Phase 2
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 4
+  completed_plans: 5
   percent: 20
 ---
 
@@ -72,6 +72,8 @@ Recent decisions affecting current work:
 - [Phase 02-auth]: jsonwebtoken rust_crypto feature required for deterministic CryptoProvider selection in tests and runtime
 - [Phase 02-auth]: PgPool provided via leptos_routes_with_context (not Axum State) — required for server function use_context access
 - [Phase 02-auth]: username derived from email local-part on register; JWT TTL 7 days
+- [Phase 02-auth]: navigate() called inside spawn_local after validate_token resolves so auth signal is set before routing — prevents flash of unauthenticated state
+- [Phase 02-auth]: Confirm password is client-side only (no name attribute, tracked by RwSignal); mismatch calls ev.prevent_default() and sets client_error signal
 
 ### Pending Todos
 
@@ -83,6 +85,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-12T09:43:11.958Z
-Stopped at: Completed 02-auth-01-PLAN.md — auth server functions and username migration
+Last session: 2026-03-12T12:11:11.244Z
+Stopped at: Paused at Task 3 checkpoint (human-verify) in 02-auth-02-PLAN.md
 Resume file: None
