@@ -1,6 +1,6 @@
 pub mod app;
-
-#[cfg(feature = "ssr")]
+pub mod auth_user;
+pub mod components;
 pub mod server;
 
 #[cfg(feature = "hydrate")]

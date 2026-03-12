@@ -1,10 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct AuthUser {
-    pub id: i32,
-    pub username: String,
-}
+pub use crate::auth_user::AuthUser;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {
