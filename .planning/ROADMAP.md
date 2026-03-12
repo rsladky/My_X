@@ -44,7 +44,10 @@ Plans:
   2. User can log in with correct credentials and have their JWT persisted in localStorage so a page refresh keeps them logged in
   3. User attempting to log in with wrong credentials sees the same generic error message as a non-existent account (no account enumeration)
   4. User can click logout from any authenticated page and be redirected to the login page with their session cleared
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — DB migration (username column), auth server functions (register/login/validate_token), PgPool wiring, unit tests
+- [ ] 02-02-PLAN.md — Login and register UI components, auth context signal, localStorage persistence, logout
 
 ### Phase 3: Posts + Profiles
 **Goal**: Authenticated users can create and delete posts, and any user's profile with their post history is viewable
@@ -87,7 +90,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 1/3 | In Progress|  |
-| 2. Auth | 0/TBD | Not started | - |
+| 2. Auth | 0/2 | Not started | - |
 | 3. Posts + Profiles | 0/TBD | Not started | - |
 | 4. Social Graph + Feed | 0/TBD | Not started | - |
 | 5. Polish | 0/TBD | Not started | - |
