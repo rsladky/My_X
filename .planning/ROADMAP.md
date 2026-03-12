@@ -58,7 +58,11 @@ Plans:
   2. Authenticated user can delete one of their own posts and see it disappear from the page; attempting to delete another user's post is rejected
   3. User can navigate to their own profile page and see all their posts in reverse-chronological order
   4. User can navigate to another user's profile page and see that user's posts in reverse-chronological order
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 03-01-PLAN.md — PostWithAuthor types, create/delete/list server functions, unit tests (TDD)
+- [ ] 03-02-PLAN.md — ComposeBox, PostCard, HomePage UI with reactive post list
+- [ ] 03-03-PLAN.md — Sidebar, AuthenticatedLayout, ProfilePage, ProtectedParentRoute routing
 
 ### Phase 4: Social Graph + Feed
 **Goal**: Authenticated users can follow and unfollow others, see follow state on profiles, and read a home feed of posts from people they follow
