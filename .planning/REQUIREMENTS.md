@@ -10,7 +10,7 @@
 - [x] **AUTH-01**: User can create an account with email and password
 - [x] **AUTH-02**: User can log in with email and password and receive a JWT
 - [x] **AUTH-03**: User session persists across browser refresh (JWT stored client-side)
-- [ ] **AUTH-04**: User can log out and have their session invalidated
+- [x] **AUTH-04**: User can log out and have their session invalidated
 
 ### Posts
 
@@ -78,7 +78,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-01 | Phase 2 | Complete |
 | AUTH-02 | Phase 2 | Complete |
 | AUTH-03 | Phase 2 | Complete |
-| AUTH-04 | Phase 2 | Pending |
+| AUTH-04 | Phase 2 | Complete |
 | POST-01 | Phase 3 | Pending |
 | POST-02 | Phase 3 | Pending |
 | POST-03 | Phase 3 | Pending |
