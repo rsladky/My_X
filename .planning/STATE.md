@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in_progress
-stopped_at: "Phase 2 context captured — ready to run /gsd:plan-phase 2"
-last_updated: "2026-03-12T01:00:00.000Z"
-last_activity: 2026-03-12 — Phase 2 CONTEXT.md written, all decisions locked
+status: planning
+stopped_at: Completed 02-auth-01-PLAN.md — auth server functions and username migration
+last_updated: "2026-03-12T09:43:11.960Z"
+last_activity: 2026-03-12 — Phase 2 context captured, ready to plan Phase 2
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 5
+  completed_plans: 4
   percent: 20
 ---
 
@@ -52,6 +52,7 @@ Progress: [██░░░░░░░░] 20%
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 15 | 1 tasks | 16 files |
 | Phase 01-foundation P01 | 45 | 2 tasks | 16 files |
+| Phase 02-auth P01 | 7 | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: Server-only crates (sqlx, jsonwebtoken, argon2) feature-gated under [ssr] to prevent WASM compilation failures
 - [Phase 01-foundation]: uuid moved to optional=true under ssr feature — uuid v4 requires OS RNG unavailable in WASM
 - [Phase 01-foundation]: Server-only crates (sqlx, jsonwebtoken, argon2, uuid) all feature-gated under [ssr] to prevent WASM compilation failures — pattern for all subsequent plans
+- [Phase 02-auth]: jsonwebtoken rust_crypto feature required for deterministic CryptoProvider selection in tests and runtime
+- [Phase 02-auth]: PgPool provided via leptos_routes_with_context (not Axum State) — required for server function use_context access
+- [Phase 02-auth]: username derived from email local-part on register; JWT TTL 7 days
 
 ### Pending Todos
 
@@ -79,6 +83,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-12T01:00:00.000Z
-Stopped at: Phase 2 CONTEXT.md written — run /gsd:plan-phase 2 to create PLAN.md
+Last session: 2026-03-12T09:43:11.958Z
+Stopped at: Completed 02-auth-01-PLAN.md — auth server functions and username migration
 Resume file: None

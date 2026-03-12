@@ -90,7 +90,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 1/3 | In Progress|  |
-| 2. Auth | 0/2 | Not started | - |
+| 2. Auth | 1/2 | In Progress|  |
 | 3. Posts + Profiles | 0/TBD | Not started | - |
 | 4. Social Graph + Feed | 0/TBD | Not started | - |
 | 5. Polish | 0/TBD | Not started | - |
