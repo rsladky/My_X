@@ -1,0 +1,46 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT p.id, p.author_id, p.content, p.created_at, u.username AS author_username\n        FROM posts p\n        JOIN users u ON u.id = p.author_id\n        WHERE u.username = $1\n        ORDER BY p.created_at DESC, p.id DESC\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "author_id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 2,
+        "name": "content",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "created_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 4,
+        "name": "author_username",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "e3adec5564e5c6bebe75f68f4ebaea505aed9d64eeb8a4d0108310eb1a1b7d92"
+}
