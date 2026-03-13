@@ -1,6 +1,9 @@
+#![recursion_limit = "1024"]
+
 pub mod app;
 pub mod auth_user;
 pub mod components;
+pub mod post_with_author;
 pub mod server;
 
 #[cfg(feature = "hydrate")]
